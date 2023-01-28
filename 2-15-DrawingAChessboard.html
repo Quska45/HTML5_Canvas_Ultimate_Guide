@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+         * start, peak 1, peak 2, end 포인트를 사용해 곡선을 그린다.
+        */
+        window.onload = function(){
+            var canvas = document.getElementById( 'line-canvas' );
+            var context = canvas.getContext( '2d' );
+
+            var lightCellColor = '#ddb180'            
+            var darkCellColor = '#7c330c'
+
+            // frame
+            context.strokeStyle = 'black'
+            context.strokeRect(250, 100, 400, 400);
+
+            for( var x=1; x<=8; ++x ){
+                for(var y=1; y<=8; ++y){
+                    if( (x+y) % 2 == 0 ){
+                        context.fillStyle = darkCellColor
+                    } else {
+                        context.fillStyle = lightCellColor;
+                    }
+                    context.fillRect( 200 + x * 50, 50+y*50, 50, 50 );
+                }
+            }
+
+            // for( var i=1; i<=8; ++i ){
+            //     if( i % 2 == 0 ){
+            //         context.fillStyle = darkCellColor
+            //     } else {
+            //         context.fillStyle = lightCellColor;
+            //     }
+            //     context.fillRect(200 + i * 50, 100, 50, 50);
+            // }
+
+            // for( var i=1; i<=8; ++i ){
+            //     if( i % 2 == 0 ){
+            //         context.fillStyle = lightCellColor
+            //     } else {
+            //         context.fillStyle = darkCellColor;
+            //     }
+            //     context.fillRect(200 + i * 50, 150, 50, 50);
+            // }
+
+
+
+            
+            // //cell 2
+            // context.fillStyle = darkCellColor;
+            // context.fillRect(300, 100, 50, 50);
+
+            // //cell 3
+            // context.fillStyle = lightCellColor;
+            // context.fillRect(350, 100, 50, 50);
+
+            // //cell 4
+            // context.fillStyle = darkCellColor;
+            // context.fillRect(400, 100, 50, 50);
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="line-canvas" width="1000px" height="1000px">
+
+    </canvas>
+</body>
+</html>

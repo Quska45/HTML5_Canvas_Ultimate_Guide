@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chart {
+            width: 600px;
+            height: 450px;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            /**
+             * Animation Loop
+             * 1. Clear the canvas
+             * 2. save the state
+             * 3. draw updates
+             * 4. restore state
+             * 
+             * 위의 과정을 더 간단하게 말하면 다음과 같음
+             * draw -> update -> clear
+            */
+
+            var start = new Date();
+            window.requestAnimationFrame(drawRandomColoredRectangle);
+
+            function drawRandomColoredRectangle( x, y , w, h ){
+
+                var now = new Date();
+                if( now - start >= 1000 ){
+                    start = now;
+
+                    //
+                
+
+                    // Randome Colors
+                    var color = createRandomRGBColor();
+                    var fillOpacity = Math.random();
+                    var fillColor = 'rgba('+ color.r + ', ' + color.g  + ', ' + color.b + ', ' + fillOpacity +')';
+                    var borderColor = 'rgba('+ color.r + ', ' + color.g  + ', ' + color.b + ')';
+
+                    var x = getRandomInt(0, canvas.width)
+                    var y = getRandomInt(0, canvas.height)
+                    var w = getRandomInt(0, canvas.width -x)
+                    var h = getRandomInt(0, canvas.height-y)
+
+                    // Draw Rectangle
+                    context.beginPath();
+                    context.fillStyle = fillColor;
+                    context.storokeStyle = borderColor
+                    context.rect( x, y , w, h );
+                    context.stroke();
+                    context.fill();
+                }
+
+                window.requestAnimationFrame(drawRandomColoredRectangle)
+            }
+        }
+
+        function createRandomRGBColor() {
+            var red = getRandomInt(0, 257);
+            var green = getRandomInt(0, 257);
+            var blue = getRandomInt(0, 257);
+            return {r: red, g: green, b: blue};
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        }
+
+        window.requestAnimationFrame = (function(){
+            return  window.requestAnimationFrame ||
+                    function(callback){
+                        window.setTimeout(callback, 1000 / 60)
+                    }
+        })()
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="1000px" height="600px">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

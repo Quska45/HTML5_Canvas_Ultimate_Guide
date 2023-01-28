@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chart {
+            width: 600px;
+            height: 450px;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            // drawImage( img, dx, dy );
+            // drawImage( img, dx, dy, dw, dh );
+            // drawImage( img, sx, sy, sw, sh dx, dy, dw, dh );
+
+            var img = new Image();
+            img.src = './arcane.jpg'
+            
+            img.onload = function(){
+                // context.drawImage( img, 250, 50 );
+                // context.drawImage( img, 250, 50, 100, 100 );
+                context.drawImage( img, 40, 100,100, 250, 250, 50, 250, 400 );
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="500px" height="500px">
+
+    </canvas>
+</body>
+</html>

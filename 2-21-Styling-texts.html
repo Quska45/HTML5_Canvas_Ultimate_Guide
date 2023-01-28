@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+         * start, peak 1, peak 2, end 포인트를 사용해 곡선을 그린다.
+        */
+        window.onload = function(){
+            var canvas = document.getElementById( 'line-canvas' );
+            var context = canvas.getContext( '2d' );
+
+            // context.font = 'font-style font-weight font-size font-family';
+
+            var text = 'This text will be styled'
+
+            context.font = 'normal 800 xx-large times'
+            context.fillText(text, 100, 100)
+
+            context.font = 'italic 400 48px monospace'
+            context.strokeText(text, 100, 150)
+
+            // font를 적용할 때는 아래와 같이 4가지 속성을 적용할 수 있다.
+            // context.font = '- - - -'
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="line-canvas" width="1000px" height="1000px">
+
+    </canvas>
+</body>
+</html>

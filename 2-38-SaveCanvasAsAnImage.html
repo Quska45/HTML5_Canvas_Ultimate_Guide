@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chart {
+            width: 600px;
+            height: 450px;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            var pokemonTile = new Image();
+            pokemonTile.src = 'file://C:/project/HTML5_Canvas_Ultimate_Guide/pokemons.png'
+
+            pokemonTile.onload = function(){
+                context.drawImage( pokemonTile, 180, 35 );
+
+                var imageData = context.getImageData( 180, 35, 550, 366 );
+    
+                for( var i =0 ; i<imageData.data.length; i+=4 ){
+                    var average = ( (imageData.data[i] + imageData.data[i+1]  + imageData.data[i+2]) / 3 )
+                    imageData.data[i] = average; // red
+                    imageData.data[i+1] = average; // green
+                    imageData.data[i+2] = average; //blue
+                    // imageData.data[i+3] = 50; //alpha
+                }
+    
+                context.putImageData(imageData, 180, 35);
+
+                // save canvas image as data url { drfault: PNG }
+                var dataURL = canvas.toDataURL();
+
+                document.getElementById('canvasImg').src = dataURL;
+            };
+
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="500px" height="500px">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

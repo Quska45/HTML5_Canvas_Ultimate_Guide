@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+         * start, peak 1, peak 2, end 포인트를 사용해 곡선을 그린다.
+        */
+        window.onload = function(){
+            var canvas = document.getElementById( 'line-canvas' );
+            var context = canvas.getContext( '2d' );
+
+            var radian = Math.PI / 180;
+            
+            context.beginPath();
+            context.strokeStyle = 'red'
+            context.lineWidth = -1;
+            context.fillStyle = 'orange'
+            // 이상하게 잘려진 원이 그려짐.
+            // 왜냐면 캔버스가 원을 그리는 방식 때문에 그럼
+            // 1. 일단 start angle과 end angle을 이어줌
+            // 2. 시작점과 끝점을 이어서 닫음
+            // 3. 지정된 색으로 원을 채움
+            context.arc(450, 300, 150, 30*radian, 360*radian, false);
+            context.stroke();
+            context.fill();
+
+            // context.strokeStyle = 'red';
+            // context.lineWidth = 11;
+            // context.lineJoin = 'round'
+            // context.fillStyle = 'blue'
+            // context.rect(450, 300, 200, 200,);
+            // context.stroke();
+            // context.fill();
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="line-canvas" width="1000px" height="1000px">
+
+    </canvas>
+</body>
+</html>

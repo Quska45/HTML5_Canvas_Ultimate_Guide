@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chart {
+            width: 600px;
+            height: 450px;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            // context.createLinearGradient(x1,y1,x2,y2);
+            // context.createRadialGradient(x1,y1,r1,x2,y2,r2);
+
+
+            // LINEAR GRADIENT
+            // var gradient = context.createLinearGradient(240, 40, 660, 680);
+            // gradient.addColorStop(0, 'red');
+            // gradient.addColorStop(0.25, 'blue');
+            // gradient.addColorStop(0.5, 'green');
+            // gradient.addColorStop(0.75, 'orange');
+            // gradient.addColorStop(1, 'white');
+
+            
+            // RADIAL GRADIENT
+            var radialGradient = context.createRadialGradient(570, 380, 300, 570, 300, 20);
+            radialGradient.addColorStop(0, 'red');
+            radialGradient.addColorStop(0.25, 'blue');
+            radialGradient.addColorStop(0.5, 'green');
+            radialGradient.addColorStop(0.75, 'orange');
+            radialGradient.addColorStop(1, 'white');
+
+
+            context.strokeStyle = "blue"
+            context.lineWidth = 4
+            context.fillStyle = radialGradient
+            context.rect(240,40,420, 420)
+            context.stroke()
+            context.fill()
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="500px" height="500px">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+         * start, peak 1, peak 2, end 포인트를 사용해 곡선을 그린다.
+        */
+        window.onload = function(){
+            var canvas = document.getElementById( 'line-canvas' );
+            var context = canvas.getContext( '2d' );
+
+            var radian =Math.PI / 180;
+
+            context.beginPath();
+            context.strokeStyle = 'red'
+            context.lineWidth = 10;
+            context.moveTo(200,250);
+            context.bezierCurveTo(200, 10, 50, 150, 400, 250)
+            context.stroke();
+
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="line-canvas" width="500px" height="500px">
+
+    </canvas>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+         * start, peak 1, peak 2, end 포인트를 사용해 곡선을 그린다.
+        */
+        window.onload = function(){
+            var canvas = document.getElementById( 'line-canvas' );
+            var context = canvas.getContext( '2d' );
+
+            // polygon variables
+            var sides = 6;
+            var radius = 100;
+            var centerX = 200;
+            var centerY = 400;
+            var startAngle = 200;
+            var angle = ( 2 * Math.PI ) / sides;
+
+            // start drawing
+            context.beginPath();
+            context.strokeStyle = 'red'
+            context.lineWidth = 5;
+            context.lineJoin = 'round'
+
+            // begining point coordinates
+            var beginX = centerX + radius * Math.cos(startAngle);
+            var beginY = centerY - radius * Math.sin(startAngle);
+
+            context.moveTo(beginX, beginY);
+
+            // draw lines
+            for( var i = 1; i <=sides; ++i ){
+                // current point's coordinates
+                var currentAngle = startAngle + i * angle;
+                var currentPointX = centerX + radius*Math.cos(currentAngle)
+                var currentPointY = centerY - radius*Math.sin(currentAngle)
+
+                // draw the line
+                context.lineTo(currentPointX, currentPointY);
+            }
+
+            context.closePath(); // close path manually
+            context.stroke()
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="line-canvas" width="1000px" height="1000px">
+
+    </canvas>
+</body>
+</html>

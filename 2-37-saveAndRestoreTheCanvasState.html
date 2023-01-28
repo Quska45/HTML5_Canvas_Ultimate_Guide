@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chart {
+            width: 600px;
+            height: 450px;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+            
+            /**
+             * State Stack
+             * context를 통해 관리되는 state는 stack에 쌓인다.
+             * 따라서 선입 선출 이라는 것을 기억하자.
+            */
+            // context.save()    -> saving the context state-canvas
+            // context.restore() -> restoring the state from the state stack
+
+            // Rect 1
+            context.fillStyle = "red"
+            context.fillRect( 240, 100, 120, 120 );
+            context.save();
+            
+            // Rect 2
+            context.fillStyle = "green"
+            context.fillRect( 390, 100, 120, 120 );
+            context.save();
+            
+            // Rect 3
+            context.fillStyle = "blue"
+            context.fillRect( 540, 100, 120, 120 );
+            context.save();
+
+            // Rect 4
+            context.restore();
+            context.fillRect( 240, 300, 120, 120 );
+            
+            // Rect 5
+            context.restore();
+            context.fillRect( 390, 300, 120, 120 );
+            
+            // Rect 6
+            context.restore();
+            context.fillRect( 540, 300, 120, 120 );
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="700px" height="500px">
+
+    </canvas>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chart {
+            width: 600px;
+            height: 450px;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            var pokemonTile = new Image();
+            pokemonTile.src = './pokemons.png'
+
+            pokemonTile.onload = function(){
+                // pikachu
+                context.drawImage( pokemonTile, 0, 0, 200, 200, 0, 0, 200, 200 );
+                // squirtile
+                context.drawImage( pokemonTile, 400, 180, 200, 200, 200, 0, 200, 200 );
+                // bulbasaur
+                context.drawImage( pokemonTile, 1000, 0, 200, 200, 400, 0, 200, 200 );
+            };
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="500px" height="500px">
+
+    </canvas>
+</body>
+</html>

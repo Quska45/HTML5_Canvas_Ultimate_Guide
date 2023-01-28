@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chart {
+            width: 600px;
+            height: 450px;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            // context.createpattern(image, repetition);
+            // repetition : 
+            // - repeat : both direction
+            // - repeat-x : horizontal only
+            // - repeat-y : vertical only
+            // - no-repeat : neither
+
+            var patternImage = new Image();
+            patternImage.src = 'apple.png'
+
+            patternImage.onload = function(){
+                var pattern = context.createPattern( patternImage, 'no-repeat' );
+                context.fillStyle = pattern
+                context.fillRect(0,0,900,450);
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="500px" height="500px">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

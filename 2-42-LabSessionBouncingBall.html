@@ -18,8 +18,55 @@
             var canvas = document.getElementById( 'canvasContainer' );
             var context = canvas.getContext( '2d' );
 
-            function drawBall( x, y, radius, color ){
+            var ballX = 400;
+            var ballY = 300
+            var ballRadius = 30
+            var ballColor = 'orange'
+            var changX = 4;
+            var changY = 4;
 
+            window.requestAnimationFrame(animationLoop)
+
+            function animationLoop(){
+                // Clear canvas
+                context.clearRect(0,0,canvas.width, canvas.height)
+
+                // update
+                if( ballY + ballRadius > canvas.height ){ // bottom edge
+                    changY *= -1
+                }
+
+                if( ballX + ballRadius > canvas.width ){ // right edge
+                    changX *= -1
+                }
+
+                if( ballY - ballRadius < 0 ){ // top edge
+                    changY *= -1
+                }
+
+                if( ballX - ballRadius < 0 ){ // left edge
+                    changX *= -1
+                }
+
+
+                ballX += changX
+                ballY += changY
+
+                // draw
+                drawBall(ballX, ballY, ballRadius, ballColor)
+
+                window.requestAnimationFrame(animationLoop)
+            }
+
+            function drawBall( x, y, radius, color ){
+                var radian = Math.PI / 180;
+
+                context.beginPath();
+                context.strokeStyle = color;
+                context.fillStyle = color;
+                context.arc(x, y, radius, 0, 360*radian, false)
+                context.stroke()
+                context.fill();
             }
            
         }

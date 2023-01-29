@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // script.js
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            /**
+             * we will learn how to vertically projectile our ball
+             * we will cover 3 different senario.
+             * 1. free fall
+             * 2. fall with initial velocity
+             * 3. the vertical projectile from bottom to top with initial velocity
+            */
+
+            var g = 0.098 //gravity
+
+            // ball1
+            var ball = new Ball(20,'blue')
+            ball.x = 100
+            ball.y = 80
+            ball.context = context
+            ball.draw()
+
+            // ball2
+            var ball2 = new Ball(20,'green')
+            ball2.x = 300
+            ball2.y = 80
+            ball2.context = context
+            ball2.draw()
+
+            // ball3
+            var ball3 = new Ball(20,'red')
+            ball3.x = 500
+            ball3.y = 500
+            ball3.context = context
+            ball3.draw()
+
+            window.requestAnimationFrame(animationLoop);
+
+            // velocity
+            ball.vy = 0;
+            ball2.vy = 5
+            ball3.vy = -10
+
+            function animationLoop() {
+    
+                // Clear Canvas
+                context.clearRect(0, 0, canvas.width, canvas.height);
+        
+                // Update
+                ball.vy = ball.vy + g
+                ball.y = ball.y + ball.vy
+
+                ball2.vy = ball2.vy + g
+                ball2.y = ball2.y + ball2.vy
+
+                ball3.vy = ball3.vy + g
+                ball3.y = ball3.y + ball3.vy
+        
+                // Draw
+                ball.draw()
+                ball2.draw()
+                ball3.draw()
+        
+                // Animate
+                window.requestAnimationFrame(animationLoop);
+            }
+    
+    
+            window.requestAnimationFrame = (function(){
+            return  window.requestAnimationFrame       ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame    ||
+                    window.msRequestAnimationFrame     ||
+                    function(callback){
+                    window.setTimeout(callback, 1000 / 60);
+                    };
+            })();
+        }
+
+
+
+        // ball.js
+        function Ball(radius, color){
+            // base
+            var ball = this;
+
+            //Specifications
+            ball.r = radius || 10;  //ball radius
+            ball.c = color || 'red' // ball color
+            ball.x = 0              // center x
+            ball.y = 0              // center y
+            ball.m = 0              // mass
+            ball.vx = 0             // velocity of x direction of ball
+            ball.vy = 0             // velocity of y direction of ball
+            ball.context = null     // the drawing context of ball
+        }
+
+        Ball.prototype.draw = function(){
+            //base
+            var ball = this;
+
+            // Check Context
+            if(!ball.context){return}
+
+            // Draw ball
+            ball.context.beginPath()
+            ball.context.fillStyle = ball.c
+            ball.context.arc(ball.x,ball.y,ball.r, 0,2*Math.PI)
+            ball.context.fill()
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="1000px" height="600px">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

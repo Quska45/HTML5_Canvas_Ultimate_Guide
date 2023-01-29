@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            var radian = Math.PI / 180
+
+            // context.translate(x,y) -> moves the canvas and its origin to (x,y)
+            // x: Distance to move in the horizontal direction
+            // y: Distance to move in the vertical direction
+
+            // Rectangle
+            context.fillStyle = 'red'
+            context.fillRect(50,50,160,160)
+            context.fill()
+            
+            // translate canvas
+            context.translate(300, 200)
+            
+            // Rectangle
+            context.fillStyle = 'red'
+            context.fillRect(50,50,160,160)
+            context.fill()
+
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="1000px" height="600px">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

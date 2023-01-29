@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // script.js
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            /**
+             * what is momentum?
+             * It's the product of the mass and the velocity of an object.
+             * p = mv : p=momentum, m = mass, v = velocity
+             * 매우 중요한데, 이유는 보존되어야 하기 때문임
+             * The total momentum is always conserved.
+             * the momentum before the collision and the momentum after the collision are equals
+             * momentum과 관련된 공식이 여러개 있으니 영상 or 강의 자료 참고
+            */
+
+            // large ball
+            var ball1 = new Ball(50, 'blue')
+            ball1.x = 290
+            ball1.y = 250
+            ball1.m = 100
+            ball1.context = context
+            ball1.draw()
+            
+            // ball2
+            var ball2 = new Ball(30, 'green')
+            ball2.x = 550
+            ball2.y = 250
+            ball1.m = 6
+            ball2.context = context
+            ball2.draw()
+
+            window.requestAnimationFrame(animationLoop);
+
+            // velocity
+            ball1.vx = 5
+            // ball1.vy = 1
+
+            ball2.vx = -10
+            // ball2.vy = -5
+
+            function animationLoop() {
+    
+                // Clear Canvas
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Update
+                ball1.x = ball1.x + ball1.vx;
+                ball2.x = ball2.x + ball2.vx;
+
+                // Detect Ball Collisions
+                if(Math.abs(ball1.x - ball2.x) < ball1.r + ball2.r){
+                    // New Velocity of Ball 1 After Collision
+                    var v1 = ((ball1.m - ball2.m) * ball1.vx) / (ball1.m + ball2.m);
+                        v1 += (2 * ball2.m * ball2.vx) / (ball1.m + ball2.m);
+
+                    // New Velocity of Ball 2 After Collision
+                    var v2 = ((ball2.m - ball1.m) * ball2.vx) / (ball2.m + ball1.m);
+                        v2 += (2 * ball1.m * ball1.vx) / (ball1.m + ball2.m);
+
+                    ball1.vx = v1;
+                    ball2.vx = v2;
+                }
+
+                // Detect Edge Collisions
+                if(ball1.x + ball1.r > canvas.width || ball1.x - ball1.r < 0){
+                    ball1.vx *= -1;
+                }
+
+                if(ball2.x + ball2.r > canvas.width || ball2.x - ball2.r < 0){
+                    ball2.vx *= -1;
+                }
+
+                // Draw
+                ball1.draw();
+                ball2.draw();
+
+                // Animate
+                window.requestAnimationFrame(animationLoop);
+            }
+    
+    
+            window.requestAnimationFrame = (function(){
+            return  window.requestAnimationFrame       ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame    ||
+                    window.msRequestAnimationFrame     ||
+                    function(callback){
+                    window.setTimeout(callback, 1000 / 60);
+                    };
+            })();
+        }
+
+
+
+        // ball.js
+        function Ball(radius, color){
+            // base
+            var ball = this;
+
+            //Specifications
+            ball.r = radius || 10;  //ball radius
+            ball.c = color || 'red' // ball color
+            ball.x = 0              // center x
+            ball.y = 0              // center y
+            ball.m = 0              // mass
+            ball.vx = 0             // velocity of x direction of ball
+            ball.vy = 0             // velocity of y direction of ball
+            ball.context = null     // the drawing context of ball
+        }
+
+        Ball.prototype.draw = function(){
+            //base
+            var ball = this;
+
+            // Check Context
+            if(!ball.context){return}
+
+            // Draw ball
+            ball.context.beginPath()
+            ball.context.fillStyle = ball.c
+            ball.context.arc(ball.x,ball.y,ball.r, 0,2*Math.PI)
+            ball.context.fill()
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="900" height="600">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

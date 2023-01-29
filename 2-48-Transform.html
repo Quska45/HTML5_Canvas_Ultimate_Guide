@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            /**
+             * 이전 3개의 강의를 통해 다음과 같은 내용을 배움
+             * - Scale()
+             * - Rotate()
+             * - Translate()
+             * 위의 3가지는 canvas context의 trasformation matrix를 조작하는 메서드 이다.
+             * trasformation matrix는 3 x 3의 행렬이다.
+             * canvas를 뭔가를 그릴 때 브라우저는 반드시 trasformation matrix을 적용시켜서 그린다.
+             * 위에서 제시된 3가지의 메서드를 matrix를 통해 조작할 수 있음
+             * |  m11   m21   dx  |
+             * |  m12   m22   dy  |
+             * |   0     0     1  |
+             * m11 : horizontal scaling
+             * m12 : horizontal skewing
+             * m21 : vertical skewing
+             * m22 : vertical scaling
+             * dx  : horizontal moving
+             * dy  : vertical moveing
+             * 
+             * 위 matrix에 따라 특정 함수를 호출할 때 마다 matrix가 업데이트 된다.
+             * matrix를 조작하려고 할 때 scale(), rotate(), translate()를 이용해도 되고 transform()을 이용해도 된다.
+             * transform(m11,m12,m21,m22,dx,dy)
+             * ex) transform(sx,0,0,sy,0,0) == scale(sx,sy)
+             * ex) transform(cos α,sin α, -sin α, -cos α, 0,0) == rotate(α)
+             * ex) transform(1,0,0,1,x,y) == translate(x,y)
+             * ex) transform(1,x,y,1,0,0) == skew(x,y)
+             * 
+             * matrix에 직접 접근해서 조작하는 메서드는 transform() 말고도 setTransform()이 있다.
+             * setTransform(m11,m12,m21,m22,dx,dy)
+             * 
+             * transform과 setTransform은 똑같은 인자를 가지지만 변형에 대해 접근하는 방식이 다르다.
+             * transform() vs setTransform()
+             * transform() : continues from transformed context. 현재 상태의 matrix를 변경함. 예를 들어 m11이 1.5라면 1.5를 다시 변경함
+             * setTransform() : continues from initial context. 최초의 matrix를 변경함. 예를 들어 m11이 1.5라고 1을 변경한 값을 사용함
+             * 
+             * 추가로 resetTransfomr()이 있다.
+             * 메서드명에서 알 수 있듯이 matrix를 기본 값으로 만들어 준다.
+            */
+
+            // context.transform(m11,m12,m21,m22,dx,dy)
+            // context.setTransform(m11,m12,m21,m22,dx,dy)
+            // context.resetTransform()
+ 
+            // Red rectangle
+            context.fillStyle = 'red'
+            context.fillRect(150,150,200,100)
+            context.fill()
+            
+            // scale transform
+            context.transform(1.5,0,0,1.5,0,0)
+            
+            // Red rectangle
+            context.fillStyle = 'blue'
+            context.fillRect(150,150,200,100)
+            context.fill()
+            
+            // scale transform
+            // context.transform(1.5,0,0,1.5,0,0)
+            context.resetTransform()
+
+            // Red rectangle
+            context.fillStyle = 'green'
+            context.fillRect(150,150,200,100)
+            context.fill()
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="1000px" height="600px">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

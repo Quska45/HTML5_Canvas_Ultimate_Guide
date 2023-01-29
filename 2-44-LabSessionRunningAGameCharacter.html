@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById( 'canvasContainer' );
+            var context = canvas.getContext( '2d' );
+
+            var isBackgoundLoaded = false
+            var isHeroLoaded = false
+
+            // back
+            var background = new Image()
+            background.src = './back.png'
+            background.onload = function(){
+                isBackgoundLoaded = true;
+            }
+            
+            //Charactor
+            var hero = new Image()
+            hero.src = './sprite.png'
+            hero.onload = function(){
+                isHeroLoaded = true;
+            }
+            
+            window.requestAnimationFrame(animationLoop)
+
+            // cell specifications
+            var cellWidth = 256
+            var cellHeight = 256
+            var currentCell = 0
+
+            // time specification
+            var animationStart = new Date()
+
+            // move specifications
+            var moveAmount = 20;
+            var moveX = 100
+
+            function animationLoop(){
+                var animationNow = new Date()
+                if(animationNow - animationStart >= 100){
+                    animationStart = animationNow;
+
+                    //clear
+                    context.clearRect(0,0,canvas.width,canvas.height)
+    
+                    // update
+                    currentCell++;
+                    currentCell%=6
+                    if(moveX >= canvas.width){
+                        moveX = -1 * cellWidth
+                    } else {
+                        moveX += moveAmount
+                    }
+                    moveX += moveAmount
+    
+                    if(isBackgoundLoaded){
+                        context.drawImage(background, 0,0,canvas.width,canvas.height)
+                    }
+                    if(isHeroLoaded){
+                        //draw
+                        context.drawImage(hero,currentCell*cellWidth,0,cellWidth,cellHeight,moveX,280,100,100)
+                    }
+
+                }
+                // animate
+                window.requestAnimationFrame(animationLoop)
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="1000px" height="600px">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

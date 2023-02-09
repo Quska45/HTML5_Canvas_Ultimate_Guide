@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvasContainer{
+            border: 1px solid black;
+            /* center align */
+            display: block;
+            width: 900;
+            height: 600;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        // script.js
+        window.onload = function () {
+
+            // Definitions
+            var canvas = document.getElementById("canvasContainer");
+
+            // Game Object
+            var flappyMonster = new FlappyMonster( canvas );
+            flappyMonster.start();
+        }
+
+
+        /**
+         * Initial Screen
+         * Game Playing Screen
+         * Game Over Screen
+        */
+        var INITIAL = 1;
+        var GAME_PLAYING = 2;
+        var GAME_OVER = 3;
+
+        // flappy-monster.js
+        function FlappyMonster( canvas ){
+            // Base
+            var game = this;
+
+            // Global Attributes
+            game.canvas = canvas;
+            game.context = game.canvas.getContext( '2d' );
+
+            // Game State
+            game.currentState = INITIAL;
+        }
+
+        FlappyMonster.prototype.start = function(){
+            var game = this;
+
+            // Start Game
+            window.requestAnimationFrame(function(){
+                game.runGameLoop();
+            });
+        }
+
+        FlappyMonster.prototype.runGameLoop = function(){
+            var game = this;
+
+            // Game State
+            switch (game.currentState) {
+                case INITIAL:
+                    //Draw INITIAL 
+                    game.drawInitialScreen();
+                    break;
+                case GAME_PLAYING:
+                    //Draw FAME PLAYING SCREEN
+                    game.drawGamePlayingScreen();
+                    break;
+                case GAME_OVER:
+                    //Draw GAME OVER SCREEN
+                    game.drawGameOverScreen();
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+
+        FlappyMonster.prototype.drawInitialScreen = function(){
+            var game = this;
+
+            // Draw
+
+            // background
+            game.context.fillStyle = 'black'
+            game.context.fillRect(0,0,game.canvas.width, game.canvas.height)
+
+            // text
+            game.context.fillStyle = 'white'
+            game.context.font = '36px Arial'
+            game.context.fillText('INITIAL', game.canvas.width/2 -100, game.canvas.height/2)
+        }
+
+        FlappyMonster.prototype.drawGamePlayingScreen = function(){
+            var game = this;
+
+            // Draw
+
+            // background
+            game.context.fillStyle = 'black'
+            game.context.fillRect(0,0,game.canvas.width, game.canvas.height)
+
+            // text
+            game.context.fillStyle = 'white'
+            game.context.font = '36px Arial'
+            game.context.fillText('GAME PLAYING', game.canvas.width/2 -100, game.canvas.height/2)
+        }
+
+        FlappyMonster.prototype.drawGameOverScreen = function(){
+            var game = this;
+
+            // Draw
+
+            // background
+            game.context.fillStyle = 'black'
+            game.context.fillRect(0,0,game.canvas.width, game.canvas.height)
+
+            // text
+            game.context.fillStyle = 'white'
+            game.context.font = '36px Arial'
+            game.context.fillText('GAME OVER', game.canvas.width/2 -100, game.canvas.height/2)
+        }
+
+
+
+
+
+        
+        // util.js
+        window.getRandomInt = function (min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        window.getRandomColor = function(){
+            var red = getRandomInt(0, 257);
+            var green = getRandomInt(0, 257);
+            var blue = getRandomInt(0, 257);
+
+            return `rgb(${red}, ${green}, ${blue})`;
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="900" height="600">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>

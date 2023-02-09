@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvasContainer{
+            border: 1px solid black;
+            /* center align */
+            display: block;
+            width: 900;
+            height: 600;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        // script.js
+        window.onload = function () {
+
+            // Definitions
+            var canvas = document.getElementById("canvasContainer");
+            var context = canvas.getContext("2d");
+        }
+
+
+
+
+
+        
+        // util.js
+        window.getRandomInt = function (min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        window.getRandomColor = function(){
+            var red = getRandomInt(0, 257);
+            var green = getRandomInt(0, 257);
+            var blue = getRandomInt(0, 257);
+
+            return `rgb(${red}, ${green}, ${blue})`;
+        }
+    </script>
+</head>
+<body>
+    <canvas  id="canvasContainer" width="900" height="600">
+
+    </canvas>
+
+    <img id="canvasImg">
+</body>
+</html>
